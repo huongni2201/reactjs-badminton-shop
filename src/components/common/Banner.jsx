@@ -3,6 +3,10 @@ import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import { ChevronRight, ChevronLeft } from 'lucide-react';
 
+import bannerFirst from '../../assets/banner_first.webp';
+import bannerSecond from '../../assets/banner_second.webp';
+import bannerThird from '../../assets/banner_third.webp';
+
 function CustomNextArrow(props) {
     const { className, style, onClick } = props;
 
@@ -45,33 +49,15 @@ const Banner = () => {
     const products = [
         {
             id: 1,
-            name: 'Product 1',
-            image: 'https://img.freepik.com/free-psd/badminton-template-design_23-2151464881.jpg?semt=ais_hybrid&w=740',
-            price: 100
+            image: bannerFirst
         },
         {
             id: 2,
-            name: 'Product 1',
-            image: 'https://img.freepik.com/free-psd/badminton-template-design_23-2151464881.jpg?semt=ais_hybrid&w=740',
-            price: 100
+            image: bannerSecond
         },
         {
             id: 3,
-            name: 'Product 1',
-            image: 'https://img.freepik.com/free-psd/badminton-template-design_23-2151464881.jpg?semt=ais_hybrid&w=740',
-            price: 100
-        },
-        {
-            id: 4,
-            name: 'Product 1',
-            image: 'https://img.freepik.com/free-psd/badminton-template-design_23-2151464881.jpg?semt=ais_hybrid&w=740',
-            price: 100
-        },
-        {
-            id: 5,
-            name: 'Product 1',
-            image: 'https://img.freepik.com/free-psd/badminton-template-design_23-2151464881.jpg?semt=ais_hybrid&w=740',
-            price: 100
+            image: bannerThird
         }
     ];
 
@@ -82,7 +68,7 @@ const Banner = () => {
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 5000,
+        autoplaySpeed: 3000,
         nextArrow: <CustomNextArrow />,
         prevArrow: <CustomPrevArrow />
     };
@@ -95,14 +81,8 @@ const Banner = () => {
                         <img
                             src={product?.image}
                             alt=''
-                            className='w-full max-h-[500px] object-cover'
+                            className='w-full max-h-[640px] object-cover'
                         />
-                        <h2 className='text-2xl font-bold mb-4 absolute top-4 left-4 text-white bg-black bg-opacity-50 p-2 rounded'>
-                            {product?.name}
-                        </h2>
-                        <p className='text-lg text-gray-700 absolute bottom-4 left-4 bg-white bg-opacity-80 p-2 rounded'>
-                            Price: ${product?.price}
-                        </p>
                     </div>
                 ))}
             </Slider>

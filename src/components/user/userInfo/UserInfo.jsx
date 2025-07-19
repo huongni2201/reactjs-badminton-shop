@@ -142,7 +142,7 @@ const UserInfo = () => {
                 {!isEditing ? (
                     <button
                         onClick={handleEdit}
-                        className='flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl hover:shadow-lg transition-all duration-300'
+                        className='flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl hover:shadow-lg transition-all duration-300 cursor-pointer'
                     >
                         <Edit size={16} />
                         <span>Chỉnh sửa</span>
@@ -151,14 +151,14 @@ const UserInfo = () => {
                     <div className='flex gap-2'>
                         <button
                             onClick={handleSave}
-                            className='flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl hover:shadow-lg transition-all duration-300'
+                            className='flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl hover:shadow-lg transition-all duration-300 cursor-pointer'
                         >
                             <Save size={16} />
                             <span>Lưu</span>
                         </button>
                         <button
                             onClick={handleCancel}
-                            className='flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-gray-500 to-gray-600 text-white rounded-xl hover:shadow-lg transition-all duration-300'
+                            className='flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-gray-500 to-gray-600 text-white rounded-xl hover:shadow-lg transition-all duration-300 cursor-pointer'
                         >
                             <X size={16} />
                             <span>Hủy</span>

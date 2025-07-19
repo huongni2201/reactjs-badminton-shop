@@ -38,7 +38,7 @@ const OrderCard = ({
                 </div>
 
                 <Link to={`/user/my-orders/${order.orderId}`}>
-                    <button className='flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl hover:shadow-lg transition-all duration-300'>
+                    <button className='flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl hover:shadow-lg transition-all duration-300 cursor-pointer'>
                         <Eye size={16} />
                         <span>Chi tiết</span>
                     </button>

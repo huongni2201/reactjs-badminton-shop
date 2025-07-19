@@ -52,7 +52,7 @@ const AlertMessage = ({
 
     return (
         <div className='fixed inset-0 z-50 flex items-center justify-center pointer-events-none'>
-            <div className='absolute inset-0 bg-black/30 backdrop-blur-sm transition-opacity duration-300'></div>
+            <div className='absolute inset-0 bg-black/20 backdrop-blur-sm transition-opacity duration-300'></div>
 
             <div
                 className={`relative bg-white ${colors.border} border-2 px-8 py-6 rounded-2xl shadow-2xl text-center max-w-md mx-4 pointer-events-auto animate-scale-in`}

@@ -17,6 +17,7 @@ const RegisterPage = () => {
 
     const [errors, setErrors] = useState({});
     const [errorMsg, setErrorMsg] = useState();
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
 
     const handleInputChange = e => {
@@ -66,6 +67,7 @@ const RegisterPage = () => {
     const handleSubmit = e => {
         e.preventDefault();
         if (validateForm()) {
+            setIsSubmitting(true);
             postRegister(formData)
                 .then(data => {
                     if (data?.statusCode >= 200 && data?.statusCode < 300) {
@@ -77,6 +79,9 @@ const RegisterPage = () => {
                     setErrorMsg(
                         err?.response?.data?.error || 'Đăng ký thất bại'
                     );
+                })
+                .finally(() => {
+                    setIsSubmitting(false);
                 });
         }
     };
@@ -162,7 +167,9 @@ const RegisterPage = () => {
                             showToggle
                         />
 
-                        <GradientButton type='submit'>Đăng Ký</GradientButton>
+                        <GradientButton type='submit' disabled={isSubmitting}>
+                            {isSubmitting ? 'Đang xử lý...' : 'Đăng Ký'}
+                        </GradientButton>
                     </form>
 
                     {/* Footer */}

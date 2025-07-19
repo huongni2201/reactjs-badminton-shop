@@ -5,6 +5,8 @@ import { useState, useRef, useEffect } from 'react';
 import { useUser } from '../../context/UserContext';
 import { useCart } from '../../context/CartContext';
 
+import logo from '../../assets/logo.svg';
+
 const Navbar = () => {
     const { userInfo, logout } = useUser();
     const { cartItems, setCartItems } = useCart();
@@ -44,14 +46,11 @@ const Navbar = () => {
                                 to='/'
                                 className='text-3xl font-bold text-red-600 hover:text-red-700 transition-colors duration-300 flex items-center gap-3 group'
                             >
-                                <div className='p-2 bg-gradient-to-br from-red-500 to-red-600 rounded-xl shadow-lg group-hover:shadow-red-200 transition-all duration-300 hover-lift'>
-                                    <Armchair
-                                        size={28}
-                                        className='text-white'
-                                    />
-                                </div>
+                                <figure className='w-12 h-12 flex items-center justify-center'>
+                                    <img src={logo}></img>
+                                </figure>
                                 <span className='bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent'>
-                                    BadmintonShop
+                                    VnbShop
                                 </span>
                             </Link>
                         </div>

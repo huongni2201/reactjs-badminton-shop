@@ -54,7 +54,7 @@ const MyOrderDetails = () => {
                     </p>
                     <button
                         onClick={() => navigate('/user/my-orders')}
-                        className='bg-gradient-to-r from-red-500 to-orange-500 text-white px-6 py-3 rounded-xl hover:shadow-lg transition-all duration-300'
+                        className='bg-gradient-to-r from-red-500 to-orange-500 text-white px-6 py-3 rounded-xl hover:shadow-lg transition-all duration-300 cursor-pointer'
                     >
                         Quay lại danh sách đơn hàng
                     </button>
@@ -69,12 +69,12 @@ const MyOrderDetails = () => {
             <div className='flex items-center gap-4 mb-8'>
                 <button
                     onClick={() => navigate('/user/my-orders')}
-                    className='p-2 hover:bg-gray-100 rounded-full transition-colors'
+                    className='p-2 hover:bg-gray-100 rounded-full transition-colors cursor-pointer'
                 >
                     <ArrowLeft size={24} />
                 </button>
                 <div className='flex items-center gap-3'>
-                    <div className='p-2 bg-gradient-to-r from-red-500 to-orange-500 rounded-xl'>
+                    <div className='p-2 bg-gradient-to-r from-red-500 to-orange-500 rounded-xl '>
                         <Package size={20} className='text-white' />
                     </div>
                     <div>

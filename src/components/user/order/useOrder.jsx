@@ -22,24 +22,30 @@ const useOrder = () => {
     const [formErrors, setFormErrors] = useState({});
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
     const { handleClearCart } = useCart();
+    const [isLoading, setIsLoading] = useState(false);
+
     const navigate = useNavigate();
 
     const baseUrl = `${import.meta.env.VITE_BACKEND_URL}/storage/product`;
 
     const fetchCartByUser = () => {
+        setIsLoading(true);
         getCart()
             .then(res => {
                 const data = res?.data;
                 if (data) {
                     setOrderItems(data.items);
                     setTotalPrice(data.totalPrice);
-                    setCustomerInfo({
-                        ...customerInfo,
+                    setCustomerInfo(prev => ({
+                        ...prev,
                         ...data.userDTO
-                    });
+                    }));
                 }
             })
-            .catch(err => console.log(err));
+            .catch(err => console.log(err))
+            .finally(() => {
+                setIsLoading(false);
+            });
     };
 
     useEffect(() => {
@@ -86,6 +92,7 @@ const useOrder = () => {
         }
 
         setFormErrors({});
+        setIsLoading(true);
 
         const orderItemsSubmit = orderItems.map(item => ({
             variantId: item.variantId,
@@ -106,17 +113,14 @@ const useOrder = () => {
 
         postOrder(orderData)
             .then(data => {
-                console.log(data);
                 const statusCode = data?.statusCode;
                 if (statusCode >= 200 && statusCode < 300) {
                     setShowSuccessMessage(true);
-                    setTimeout(() => {
-                        setShowSuccessMessage(false);
-                    }, 4000);
                     handleClearCart();
                 }
             })
-            .catch(err => console.log(err));
+            .catch(err => console.log(err))
+            .finally(() => setIsLoading(false));
     };
 
     const handleSuccessMessage = () => {
@@ -125,6 +129,7 @@ const useOrder = () => {
     };
 
     return {
+        isLoading,
         orderItems,
         setOrderItems,
         totalPrice,

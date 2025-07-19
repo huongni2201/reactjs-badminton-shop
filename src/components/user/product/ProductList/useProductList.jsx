@@ -87,6 +87,42 @@ const useProductList = () => {
         return filters.join(' and ');
     };
 
+    useEffect(() => {
+        const rawFilter = searchParams.get('filter');
+        const page = parseInt(searchParams.get('page')) || 1;
+        setCurrentPage(page);
+
+        if (!rawFilter) {
+            setSelectedCategories([]);
+            setSelectedBrand([]);
+            return;
+        }
+
+        // Parse category filter
+        const categoryMatch = rawFilter.match(
+            /category\.name\s+in\s+\[([^\]]+)\]/
+        );
+        const brandMatch = rawFilter.match(/brand\.name\s+in\s+\[([^\]]+)\]/);
+
+        if (categoryMatch) {
+            const catList = categoryMatch[1]
+                .split(',')
+                .map(s => s.trim().replace(/^'(.*)'$/, '$1'));
+            setSelectedCategories(catList);
+        } else {
+            setSelectedCategories([]);
+        }
+
+        if (brandMatch) {
+            const brandList = brandMatch[1]
+                .split(',')
+                .map(s => s.trim().replace(/^'(.*)'$/, '$1'));
+            setSelectedBrand(brandList);
+        } else {
+            setSelectedBrand([]);
+        }
+    }, [searchParams]);
+
     // Update URL filter param when filters change
     useEffect(() => {
         const filterString = buildFilterQuery({
