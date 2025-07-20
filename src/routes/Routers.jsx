@@ -21,6 +21,7 @@ import MyOrders from '../components/user/order/myOrders/MyOrders';
 import Users from '../components/admin/user/Users';
 import RbacRoute from '../components/core/RbacRoute';
 import { permissions } from '../config/rbacConfig';
+import AccessDenied from '../pages/AccessDeniedPage';
 
 const ProtectedRoute = () => {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -84,9 +85,44 @@ const Routers = () => {
                         >
                             <Route path='dashboard' element={<Dashboard />} />
                         </Route>
-                        <Route path='users' element={<Users />} />
-                        <Route path='products' element={<Products />} />
-                        <Route path='orders' element={<Orders />} />
+                        {/* Users */}
+                        <Route
+                            element={
+                                <RbacRoute
+                                    requiredPermission={
+                                        permissions.MANAGE_ALL_USERS
+                                    }
+                                />
+                            }
+                        >
+                            <Route path='users' element={<Users />} />
+                        </Route>
+                        {/* Products */}
+                        <Route
+                            element={
+                                <RbacRoute
+                                    requiredPermission={
+                                        permissions.MANAGE_PRODUCTS
+                                    }
+                                />
+                            }
+                        >
+                            <Route path='products' element={<Products />} />
+                            <Route path='brands' element={<Brands />} />
+                            <Route path='categories' element={<Categories />} />
+                        </Route>
+                        {/* Orders */}
+                        <Route
+                            element={
+                                <RbacRoute
+                                    requiredPermission={
+                                        permissions.MANAGE_ALL_ORDERS
+                                    }
+                                />
+                            }
+                        >
+                            <Route path='orders' element={<Orders />} />
+                        </Route>
                         <Route path='brands' element={<Brands />} />
                         <Route path='categories' element={<Categories />} />
                     </Route>
@@ -94,6 +130,8 @@ const Routers = () => {
 
                 {/* Not Found */}
                 <Route path='*' element={<NotFound />} />
+
+                <Route path='/access-denied' element={<AccessDenied />} />
             </Routes>
         </div>
     );

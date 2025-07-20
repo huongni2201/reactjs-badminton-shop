@@ -2,7 +2,6 @@
 export const roles = {
     USER: 'user',
     STAFF: 'staff',
-    MANAGER: 'manager',
     ADMIN: 'admin'
 };
 
@@ -31,11 +30,6 @@ export const rolePermissions = {
     [roles.STAFF]: [
         permissions.VIEW_PRODUCTS,
         permissions.MANAGE_ALL_ORDERS
-    ],
-    [roles.MANAGER]: [
-        permissions.VIEW_PRODUCTS,
-        permissions.MANAGE_PRODUCTS,
-        permissions.MANAGE_PROMOTIONS
     ],
     [roles.ADMIN]: Object.values(permissions)
 };

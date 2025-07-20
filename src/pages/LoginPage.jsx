@@ -64,7 +64,13 @@ const LoginPage = () => {
             setUserInfo(userInfo);
             toast.success(res?.data?.message);
 
-            navigate('/');
+            if (userInfo.role === 'ADMIN') {
+                navigate('/dashboard');
+            } else if (userInfo.role === 'STAFF') {
+                navigate('/admin/products');
+            } else {
+                navigate('/');
+            }
         }
     };
 
