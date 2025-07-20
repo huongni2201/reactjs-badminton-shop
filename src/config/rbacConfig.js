@@ -1,8 +1,8 @@
 // Roles user in system
 export const roles = {
-    USER: 'user',
-    STAFF: 'staff',
-    ADMIN: 'admin'
+    USER: 'USER',
+    STAFF: 'STAFF',
+    ADMIN: 'ADMIN'
 };
 
 

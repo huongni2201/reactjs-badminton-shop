@@ -4,12 +4,12 @@ import { Navigate, Outlet } from 'react-router-dom';
 
 const RbacRoute = ({ requiredPermission, redirectTo = '/access-denied' }) => {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-    const userRole = user?.role;
+    const userRole = userInfo?.role?.name;
 
-    const { hasPermissions } = usePermission(userRole);
+    const { hasPermission } = usePermission(userRole);
 
-    if (!hasPermissions(requiredPermission)) {
-        return <Navigate redirectTo={redirectTo} replace={true} />;
+    if (!hasPermission(requiredPermission)) {
+        return <Navigate to={redirectTo} replace={true} />;
     }
 
     return <Outlet />;

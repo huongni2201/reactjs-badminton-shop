@@ -9,7 +9,7 @@ import { useUser } from '../context/UserContext';
 import { toast } from 'react-toastify';
 
 const LoginPage = () => {
-    const { setUserInfo } = useUser();
+    const { userInfo, setUserInfo } = useUser();
     const [formData, setFormData] = useState({
         username: '',
         password: ''
@@ -67,9 +67,9 @@ const LoginPage = () => {
             setUserInfo(userInfo);
             toast.success(res?.data?.message);
 
-            if (userInfo.role === 'ADMIN') {
-                navigate('/dashboard');
-            } else if (userInfo.role === 'STAFF') {
+            if (userInfo.role.name === 'ADMIN') {
+                navigate('/admin/dashboard');
+            } else if (userInfo.role.name === 'STAFF') {
                 navigate('/admin/products');
             } else {
                 navigate('/');

@@ -13,6 +13,8 @@ const Navbar = () => {
     const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
     const userDropdownRef = useRef(null);
 
+    const baseUrl = `${import.meta.env.VITE_BACKEND_URL}/storage/avatar`;
+
     useEffect(() => {
         const handleClickOutside = event => {
             if (
@@ -123,7 +125,7 @@ const Navbar = () => {
                                         >
                                             <img
                                                 src={
-                                                    userInfo.avatar ||
+                                                    `${baseUrl}/${userInfo.avatar}` ||
                                                     'https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg'
                                                 }
                                                 alt={userInfo.fullName}
@@ -145,7 +147,7 @@ const Navbar = () => {
                                                     >
                                                         Tài khoản
                                                     </Link>
-                                                    {userInfo.role ===
+                                                    {userInfo.role.name ===
                                                         'USER' && (
                                                         <Link
                                                             to='/user/my-orders'
@@ -159,7 +161,7 @@ const Navbar = () => {
                                                             Đơn hàng
                                                         </Link>
                                                     )}
-                                                    {userInfo.role !==
+                                                    {userInfo.role.name !==
                                                         'USER' && (
                                                         <Link
                                                             to='/admin/dashboard'

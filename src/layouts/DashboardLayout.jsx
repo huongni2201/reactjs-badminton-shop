@@ -13,10 +13,15 @@ import AdminNavbar from '../components/admin/AdminNavbar';
 import ThemeToggle from '../components/common/ThemeToggle';
 import { usePermission } from '../hooks/usePermission';
 
+import logo from '../assets/logo.svg';
+
 const DashboardLayout = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const location = useLocation();
-    const { hasPermissions } = usePermission();
+    const { hasPermission } = usePermission();
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+
+    const baseUrl = `${import.meta.env.VITE_BACKEND_URL}/storage/avatar`;
 
     const menuItems = [
         { name: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
@@ -79,9 +84,20 @@ const DashboardLayout = () => {
                     {/* Logo & Close Button */}
                     <div className='p-6 border-b border-base-200'>
                         <div className='flex items-center justify-between'>
-                            <h1 className='text-2xl font-bold text-primary'>
-                                🏸 Badminton Store
-                            </h1>
+                            {/* Logo */}
+                            <div className='logo_wrapper px-4'>
+                                <Link
+                                    to='/'
+                                    className='text-3xl font-bold text-red-600 hover:text-red-700 transition-colors duration-300 flex items-center gap-3 group'
+                                >
+                                    <figure className='w-12 h-12 flex items-center justify-center'>
+                                        <img src={logo}></img>
+                                    </figure>
+                                    <span className='bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent'>
+                                        VnbShop
+                                    </span>
+                                </Link>
+                            </div>
                             <button
                                 className='btn btn-ghost btn-sm lg:hidden'
                                 onClick={() => setSidebarOpen(false)}
@@ -125,19 +141,26 @@ const DashboardLayout = () => {
                     </nav>
 
                     {/* User Info */}
-                    <div className='absolute bottom-0 left-0 right-0 p-4 border-t border-base-200'>
+                    <div className='absolute bottom-0 left-0 right-0 p-3 border-t border-base-200'>
                         <div className='flex items-center gap-3 p-3 bg-base-200 rounded-lg'>
                             <div className='avatar placeholder'>
                                 <div className='bg-primary text-primary-content rounded-full w-10'>
-                                    <span>A</span>
+                                    <img
+                                        src={
+                                            `${baseUrl}/${userInfo.avatar}` ||
+                                            'https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg'
+                                        }
+                                        alt={userInfo.fullName}
+                                        className='w-10 h-10 rounded-full object-cover border border-red-200'
+                                    />
                                 </div>
                             </div>
                             <div>
                                 <p className='font-medium text-sm'>
-                                    Admin User
+                                    {userInfo?.fullName || 'Admin User'}
                                 </p>
                                 <p className='text-xs text-base-content/70'>
-                                    admin@badminton.com
+                                    {userInfo?.email || ''}
                                 </p>
                             </div>
                         </div>
