@@ -16,6 +16,7 @@ const LoginPage = () => {
     });
 
     const [errors, setErrors] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleInputChange = e => {
@@ -47,8 +48,10 @@ const LoginPage = () => {
 
     const handleSubmit = async e => {
         e.preventDefault();
+        setIsLoading(true);
         if (validateForm()) {
             const res = await postLogin(formData);
+            setIsLoading(false);
 
             const user = res?.data?.data?.user;
 
@@ -131,7 +134,9 @@ const LoginPage = () => {
                             </Link>
                         </div>
 
-                        <GradientButton type='submit'>Đăng Nhập</GradientButton>
+                        <GradientButton type='submit'>
+                            {isLoading ? 'Đang xử lý...' : 'Đăng Nhập'}
+                        </GradientButton>
                     </form>
 
                     {/* Footer */}
