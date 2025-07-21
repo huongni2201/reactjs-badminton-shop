@@ -108,7 +108,7 @@ const Navbar = () => {
                                 {!userInfo ? (
                                     <div className='flex items-center gap-3'>
                                         <Link to='/login'>
-                                            <button className='px-4 py-2 bg-red-50 rounded-xl hover:bg-red-100 text-red-600 font-medium transition-all duration-300 hover-lift hover:shadow-lg hover:shadow-red-100'>
+                                            <button className='cursor-pointer px-4 py-2 bg-red-50 rounded-xl hover:bg-red-100 text-red-600 font-medium transition-all duration-300 hover-lift hover:shadow-lg hover:shadow-red-100'>
                                                 Đăng nhập
                                             </button>
                                         </Link>

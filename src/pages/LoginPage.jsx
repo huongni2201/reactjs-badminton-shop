@@ -7,6 +7,7 @@ import Cookies from 'js-cookie';
 import { postLogin } from '../services/authService';
 import { useUser } from '../context/UserContext';
 import { toast } from 'react-toastify';
+import { ClipLoader } from 'react-spinners';
 
 const LoginPage = () => {
     const { userInfo, setUserInfo } = useUser();
@@ -134,8 +135,15 @@ const LoginPage = () => {
                             </Link>
                         </div>
 
-                        <GradientButton type='submit'>
-                            {isLoading ? 'Đang xử lý...' : 'Đăng Nhập'}
+                        <GradientButton type='submit' disabled={isLoading}>
+                            {isLoading ? (
+                                <div className='flex items-center justify-center gap-2'>
+                                    <ClipLoader size={20} color='white' />
+                                    <span>Đang xử lý...</span>
+                                </div>
+                            ) : (
+                                'Đăng Nhập'
+                            )}
                         </GradientButton>
                     </form>
 
