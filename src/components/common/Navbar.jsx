@@ -147,20 +147,17 @@ const Navbar = () => {
                                                     >
                                                         Tài khoản
                                                     </Link>
-                                                    {userInfo.role.name ===
-                                                        'USER' && (
-                                                        <Link
-                                                            to='/user/my-orders'
-                                                            className='block px-6 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200'
-                                                            onClick={() =>
-                                                                setIsUserDropdownOpen(
-                                                                    false
-                                                                )
-                                                            }
-                                                        >
-                                                            Đơn hàng
-                                                        </Link>
-                                                    )}
+                                                    <Link
+                                                        to='/user/my-orders'
+                                                        className='block px-6 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200'
+                                                        onClick={() =>
+                                                            setIsUserDropdownOpen(
+                                                                false
+                                                            )
+                                                        }
+                                                    >
+                                                        Đơn hàng
+                                                    </Link>
                                                     {userInfo.role.name !==
                                                         'USER' && (
                                                         <Link

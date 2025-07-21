@@ -23,6 +23,7 @@ import Users from '../components/admin/user/Users';
 import RbacRoute from '../components/core/RbacRoute';
 import { permissions } from '../config/rbacConfig';
 import AccessDenied from '../pages/AccessDeniedPage';
+import OrderPaymentPage from '../pages/OrderPaymentPage';
 
 const ProtectedRoute = () => {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -56,6 +57,10 @@ const Routers = () => {
                     <Route element={<ProtectedRoute />}>
                         <Route path='/carts' element={<CartPage />} />
                         <Route path='/orders' element={<OrderPage />} />
+                        <Route
+                            path='/orders/payment'
+                            element={<OrderPaymentPage />}
+                        />
                         <Route path='/user'>
                             <Route path='my-orders' element={<MyOrders />} />
                             <Route

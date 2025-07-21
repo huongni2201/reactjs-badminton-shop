@@ -13,7 +13,6 @@ const Order = () => {
         formErrors,
         paymentMethod,
         showSuccessMessage,
-        setShowSuccessMessage,
         setPaymentMethod,
         handleInputChange,
         handleSubmitOrder,
@@ -33,7 +32,7 @@ const Order = () => {
                     <h2>Đặt hàng</h2>
                 </div>
 
-                <form onSubmit={handleSubmitOrder}>
+                <form>
                     <div className='grid lg:grid-cols-12 gap-8'>
                         {/* Customer Information */}
                         <div className='lg:col-span-8 space-y-6'>
@@ -240,75 +239,6 @@ const Order = () => {
                                         </div>
                                     ))}
                                 </div>
-
-                                {paymentMethod === 'BANK' && (
-                                    <div className='mt-4 p-4 bg-gray-50 border border-gray-200 rounded-xl'>
-                                        <h4 className='text-lg font-semibold text-gray-800 mb-4'>
-                                            Thông tin chuyển khoản ngân hàng
-                                        </h4>
-
-                                        <div className='flex justify-between space-x-4 mb-4'>
-                                            <div className='space-y-2 text-gray-700 text-sm'>
-                                                <p>
-                                                    <strong>Ngân hàng:</strong>{' '}
-                                                    Vietcombank (VCB)
-                                                </p>
-                                                <p>
-                                                    <strong>
-                                                        Số tài khoản:
-                                                    </strong>{' '}
-                                                    0123456789
-                                                </p>
-                                                <p>
-                                                    <strong>
-                                                        Chủ tài khoản:
-                                                    </strong>{' '}
-                                                    NGUYEN VAN A
-                                                </p>
-                                                <p>
-                                                    <strong>Số tiền:</strong>{' '}
-                                                    <span className='text-red-600 font-semibold'>
-                                                        {totalPrice.toLocaleString()}
-                                                        đ
-                                                    </span>
-                                                </p>
-                                                <p>
-                                                    <strong>
-                                                        Nội dung chuyển khoản:
-                                                    </strong>{' '}
-                                                    <span className='text-blue-600 font-semibold'>
-                                                        DH
-                                                        {customerInfo.phone?.slice(
-                                                            -4
-                                                        )}
-                                                        -
-                                                        {Math.floor(totalPrice)}
-                                                    </span>
-                                                </p>
-                                            </div>
-
-                                            <div className='mt-4'>
-                                                <h5 className='font-medium mb-2'>
-                                                    Quét mã QR để chuyển khoản
-                                                    nhanh:
-                                                </h5>
-                                                <img
-                                                    src={`https://img.vietqr.io/image/VCB-0123456789-compact2.png?amount=${totalPrice}&addInfo=DH${customerInfo.phone?.slice(
-                                                        -4
-                                                    )}-${Math.floor(
-                                                        totalPrice
-                                                    )}`}
-                                                    alt='QR Chuyển khoản'
-                                                    className='w-56 h-auto rounded-lg border'
-                                                />
-                                                <p className='text-xs text-gray-500 mt-2'>
-                                                    * Quét bằng app ngân hàng
-                                                    hoặc ví điện tử
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                )}
                             </div>
                         </div>
 

@@ -23,6 +23,7 @@ const useOrder = () => {
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
     const { handleClearCart } = useCart();
     const [isLoading, setIsLoading] = useState(false);
+    const [newOrder, setNewOrder] = useState(null);
 
     const navigate = useNavigate();
 
@@ -41,7 +42,6 @@ const useOrder = () => {
                         ...data.userDTO
                     }));
                 }
-                console.log(data);
             })
             .catch(err => console.log(err))
             .finally(() => {
@@ -117,6 +117,11 @@ const useOrder = () => {
                 const statusCode = data?.statusCode;
                 if (statusCode >= 200 && statusCode < 300) {
                     setShowSuccessMessage(true);
+                    setNewOrder(data?.data);
+                    localStorage.setItem(
+                        'latestOrder',
+                        JSON.stringify(data.data)
+                    );
                     handleClearCart();
                 }
             })
@@ -126,6 +131,10 @@ const useOrder = () => {
 
     const handleSuccessMessage = () => {
         setShowSuccessMessage(false);
+        if (newOrder?.paymentMethod === 'BANK') {
+            navigate('/orders/payment');
+            return;
+        }
         navigate('/user/my-orders');
     };
 
