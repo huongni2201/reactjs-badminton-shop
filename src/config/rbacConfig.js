@@ -12,10 +12,13 @@ export const permissions = {
     ORDER_PRODUCTS: 'order_products',
     VIEW_OWN_ORDERS: 'view_own_orders',
 
-    MANAGE_ALL_USERS: 'manage_all_users',
-    MANAGE_ALL_ORDERS: 'manage_all_orders',
+    MANAGE_USERS: 'manage_users',
+    MANAGE_ORDERS: 'manage_orders',
     MANAGE_PRODUCTS: 'manage_products',
     MANAGE_PROMOTIONS: 'manage_promotions',
+    MANAGE_CATEGORIES: 'manage_categories',
+    MANAGE_BRANDS: 'manage_brands',
+    MANAGE_ROLES: 'manage_roles',
 
     VIEW_DASHBOARD: 'view_dashboard'
 };
@@ -28,8 +31,11 @@ export const rolePermissions = {
         permissions.VIEW_OWN_ORDERS
     ],
     [roles.STAFF]: [
-        permissions.VIEW_PRODUCTS,
-        permissions.MANAGE_ALL_ORDERS
+        permissions.MANAGE_ORDERS,
+        permissions.MANAGE_PRODUCTS,
+        permissions.MANAGE_CATEGORIES,
+        permissions.MANAGE_BRANDS,
+        permissions.MANAGE_ROLES,
     ],
     [roles.ADMIN]: Object.values(permissions)
 };

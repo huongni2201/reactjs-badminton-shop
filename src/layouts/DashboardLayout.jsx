@@ -7,44 +7,68 @@ import {
     Package,
     ShoppingCart,
     Menu,
-    X
+    X,
+    ChartBarStacked,
+    Bitcoin,
+    UserCheck
 } from 'lucide-react';
 import AdminNavbar from '../components/admin/AdminNavbar';
 import ThemeToggle from '../components/common/ThemeToggle';
 import { usePermission } from '../hooks/usePermission';
 
 import logo from '../assets/logo.svg';
+import { has } from 'lodash';
 
 const DashboardLayout = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const location = useLocation();
-    const { hasPermission } = usePermission();
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    const { hasPermission } = usePermission(userInfo?.role?.name);
 
     const baseUrl = `${import.meta.env.VITE_BACKEND_URL}/storage/avatar`;
 
     const menuItems = [
-        { name: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
-        { name: 'Quản lý User', href: '/admin/users', icon: User },
+        {
+            name: 'Dashboard',
+            href: '/admin/dashboard',
+            icon: LayoutDashboard,
+            requiresPermission: 'view_dashboard'
+        },
+        {
+            name: 'Quản lý User',
+            href: '/admin/users',
+            icon: User,
+            requiresPermission: 'manage_users'
+        },
         {
             name: 'Quản lý Sản phẩm',
             href: '/admin/products',
-            icon: Package
+            icon: Package,
+            requiresPermission: 'manage_products'
         },
         {
             name: 'Quản lý Đơn hàng',
             href: '/admin/orders',
-            icon: ShoppingCart
+            icon: ShoppingCart,
+            requiresPermission: 'manage_orders'
         },
         {
             name: 'Quản lý Danh mục',
             href: '/admin/categories',
-            icon: ShoppingCart
+            icon: ChartBarStacked,
+            requiresPermission: 'manage_products'
         },
         {
             name: 'Quản lý Thương hiệu',
             href: '/admin/brands',
-            icon: ShoppingCart
+            icon: Bitcoin,
+            requiresPermission: 'manage_brands'
+        },
+        {
+            name: 'Quản lý Vai trò',
+            href: '/admin/roles',
+            icon: UserCheck,
+            requiresPermission: 'manage_roles'
         }
     ];
 
@@ -119,24 +143,30 @@ const DashboardLayout = () => {
                     {/* Menu Items */}
                     <nav className='p-4'>
                         <ul className='menu menu-lg w-full '>
-                            {menuItems.map((item, index) => (
-                                <li key={index} className='mb-1'>
-                                    <Link
-                                        to={item.href}
-                                        className={`flex items-center gap-4 p-3 rounded-lg duration-200 ${
-                                            isActive(item.href)
-                                                ? 'bg-primary text-primary-content shadow-lg'
-                                                : 'hover:bg-base-200 text-base-content'
-                                        }`}
-                                        onClick={() => setSidebarOpen(false)}
-                                    >
-                                        <item.icon size={20} />
-                                        <span className='text-sm'>
-                                            {item.name}
-                                        </span>
-                                    </Link>
-                                </li>
-                            ))}
+                            {menuItems
+                                .filter(item =>
+                                    hasPermission(item.requiresPermission)
+                                )
+                                .map((item, index) => (
+                                    <li key={index} className='mb-1'>
+                                        <Link
+                                            to={item.href}
+                                            className={`flex items-center gap-4 p-3 rounded-lg duration-200 ${
+                                                isActive(item.href)
+                                                    ? 'bg-primary text-primary-content shadow-lg'
+                                                    : 'hover:bg-base-200 text-base-content'
+                                            }`}
+                                            onClick={() =>
+                                                setSidebarOpen(false)
+                                            }
+                                        >
+                                            <item.icon size={20} />
+                                            <span className='text-sm'>
+                                                {item.name}
+                                            </span>
+                                        </Link>
+                                    </li>
+                                ))}
                         </ul>
                     </nav>
 

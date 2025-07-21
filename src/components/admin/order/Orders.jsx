@@ -9,7 +9,7 @@ import {
     ShieldOff,
     Ban
 } from 'lucide-react';
-import StatCard from './StatCard';
+import StatCard from '../StatCard';
 
 const Orders = () => {
     const [searchTerm, setSearchTerm] = useState('');

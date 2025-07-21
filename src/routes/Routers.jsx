@@ -5,10 +5,11 @@ import ClientLayout from '../layouts/ClientLayout';
 import DashboardLayout from '../layouts/DashboardLayout';
 import ProductListPage from '../pages/ProductListPage';
 import CartPage from '../pages/CartPage';
-import Dashboard from '../components/admin/Dashboard';
-import Orders from '../components/admin/Orders';
-import Brands from '../components/admin/Brands';
-import Categories from '../components/admin/Categories';
+import Dashboard from '../components/admin/dashboard/Dashboard';
+import Orders from '../components/admin/order/Orders';
+import Brands from '../components/admin/brand/Brands';
+import Categories from '../components/admin/category/Categories';
+import Roles from '../components/admin/role/Roles';
 import NotFound from '../pages/NotFound';
 import ProductDetailsPage from '../pages/ProductDetailsPage';
 import Products from '../components/admin/product/Products';
@@ -90,7 +91,7 @@ const Routers = () => {
                             element={
                                 <RbacRoute
                                     requiredPermission={
-                                        permissions.MANAGE_ALL_USERS
+                                        permissions.MANAGE_USERS
                                     }
                                 />
                             }
@@ -108,8 +109,30 @@ const Routers = () => {
                             }
                         >
                             <Route path='products' element={<Products />} />
-                            <Route path='brands' element={<Brands />} />
+                        </Route>
+                        {/* Categories */}
+                        <Route
+                            element={
+                                <RbacRoute
+                                    requiredPermission={
+                                        permissions.MANAGE_CATEGORIES
+                                    }
+                                />
+                            }
+                        >
                             <Route path='categories' element={<Categories />} />
+                        </Route>
+                        {/* Brands */}
+                        <Route
+                            element={
+                                <RbacRoute
+                                    requiredPermission={
+                                        permissions.MANAGE_BRANDS
+                                    }
+                                />
+                            }
+                        >
+                            <Route path='brands' element={<Brands />} />
                         </Route>
 
                         {/* Orders */}
@@ -117,15 +140,26 @@ const Routers = () => {
                             element={
                                 <RbacRoute
                                     requiredPermission={
-                                        permissions.MANAGE_ALL_ORDERS
+                                        permissions.MANAGE_ORDERS
                                     }
                                 />
                             }
                         >
                             <Route path='orders' element={<Orders />} />
                         </Route>
-                        <Route path='brands' element={<Brands />} />
-                        <Route path='categories' element={<Categories />} />
+
+                        {/* Roles */}
+                        <Route
+                            element={
+                                <RbacRoute
+                                    requiredPermission={
+                                        permissions.MANAGE_ROLES
+                                    }
+                                />
+                            }
+                        >
+                            <Route path='roles' element={<Roles />} />
+                        </Route>
                     </Route>
                 </Route>
 
